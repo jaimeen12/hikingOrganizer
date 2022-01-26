@@ -1,0 +1,20 @@
+extends layout 
+
+block content 
+
+    div(class="container")
+
+        h2 Search for a Group
+        form(action="/groups/search" method="POST")
+            h3 Name: 
+            input(type="text" name="groupname" placeholder="")
+            button(class = "w-10 btn btn-sm btn-primary mt-2 mb-2" type="submit") Search
+
+        h2 All Groups
+        ul 
+            each group, i in groups 
+                li=  group.dataValues.name
+                    -var name = group.dataValues.name
+                    a(class="text-success" href='/group/join/' + name)    Join 
+
+        a(class = "w-10 btn btn-lg btn-danger mt-2 mb-2" href='/dashboard')  Return to Dashboard

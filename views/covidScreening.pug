@@ -1,0 +1,9 @@
+extends layout 
+
+block content 
+
+    h2 Have you shown any Covid related symptoms recently?
+        - var id = groupname
+        div(class="row")
+            a(class = "w-10 btn btn-sm btn-danger mt-5 mb-2" href='/group/covidPositive/')  Yes
+            a(class = "w-10 btn btn-sm btn-success mt-2 mb-2" href='/group/accept/hikingsession/'+id)  No

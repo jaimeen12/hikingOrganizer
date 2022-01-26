@@ -1,0 +1,9 @@
+extends layout 
+
+block content 
+
+    ul 
+        each group, i in groups 
+            li=  group.dataValues.name
+                -var name = group.dataValues.name
+                a(href='/group/join/' + name)    Join 

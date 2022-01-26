@@ -1,0 +1,78 @@
+extends layout 
+
+block content 
+
+    hr
+    div(class="container")
+    
+        h2 New Members
+        -if(notifications)
+            each notification, i in notifications 
+                div(class="col list-unstyled")
+                    li= notification.dataValues.username
+                        - var id = notification.dataValues.id;
+                        div(class="row")
+                        a(class = "w-10 btn btn-sm btn-success mt-2 mb-2" href='/group/accept/' + id)  Accept
+                        a(class = "w-10 btn btn-sm btn-danger mt-2 mb-2" href='/group/reject/' + id)  Reject
+    hr
+    div(class="container")
+        h2 Messages
+        -if(messages)
+            each message, i in messages
+                div(class="col list-unstyled text-danger")
+                    li= message.dataValues.user 
+                    div(class="row ms-auto text-secondary")
+                        li= message.dataValues.messageContent
+               
+        a(class = "w-10 btn btn-sm btn-primary mt-2 mb-2" href='/group/create/message/' + title)  Create Message
+
+    hr
+    div(class="container")
+        h2 My Hiking Sessions
+        -if(hikingnotifications)
+            each hikingnotification, i in hikingnotifications 
+                ul(class="list-unstyled")
+                    -if(hikingnotification.dataValues.accept==true)
+                        li= "Location: "+ hikingnotification.dataValues.hikingSession.dataValues.location
+                        li= "Time: " +  hikingnotification.dataValues.hikingSession.dataValues.time
+                        li= "Created by "+ hikingnotification.dataValues.username
+                        - var id = hikingnotification.dataValues.id;
+                        //- a(href='/group/covidScreening/' + id)  Accept
+                        //- a(href='/group/reject/hikingsession/' + id)  Reject
+            
+    hr
+    div(class="container")
+        h2 Group Hiking Sessions
+        -if(hikingnotifications)
+            each hikingnotification, i in hikingnotifications 
+                ul(class="list-unstyled")
+                    -if(hikingnotification.dataValues.accept==false)
+                        li= "Location: "+ hikingnotification.dataValues.hikingSession.dataValues.location
+                        li= "Time: " +  hikingnotification.dataValues.hikingSession.dataValues.time
+                        li= "Created by "+ hikingnotification.dataValues.username
+                        - var id = hikingnotification.dataValues.id;
+                        div(class="row")
+                        a(class = "w-10 btn btn-sm btn-success mt-2 mb-2" href='/group/covidScreening/' + id)  Accept
+                        a(class = "w-10 btn btn-sm btn-danger mt-2 mb-2" href='/group/reject/hikingsession/' + id)  Reject     
+
+
+    hr
+    div(class="container")
+        h2 Create Hiking Session
+            
+        form(action=`create/hiking-session/${title}` method="post")
+            p Location:
+            input(class = "mb-3" type="text" name="location" placeholder="Enter Your location ")
+            p Time:
+            input(class = "mb-3" type="text" name="time" placeholder="Enter the time")
+            p 
+            input(class="w-10 btn btn-m btn-warning mt-2 mb-2" type="submit")
+
+    hr
+    div(class="container")
+        h2 Invite a User to the Group 
+        form(action=`inviteUser/${title}` method="post")
+            p Username:
+            input(type="text" name="username" placeholder="Enter Username")
+            p 
+            input(class="w-10 btn btn-m btn-warning mt-2 mb-2" type="submit")

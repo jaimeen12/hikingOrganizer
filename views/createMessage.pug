@@ -1,0 +1,9 @@
+extends layout 
+
+block content 
+    div(class="text-center  mt-4 mb-2 ")
+        form(action=`${groupname}` method="post")
+            h2 Message:
+            input(class="text-center  p-5 w-50 mt-3 mb-2" type="text" name="message" placeholder="Enter Your Message ")
+            p 
+            input(class="w-20 btn btn-lg btn-primary mt-2 mb-5" type="submit")
